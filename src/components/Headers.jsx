@@ -22,26 +22,29 @@ const list = [
 ];
 
 const Headers = () => {
-
-    const {user ,isSignedIn} = useUser()
+  const { user, isSignedIn } = useUser();
 
   return (
-    <div>
+    <div className="flex justify-between items-center shadow-sm p-5">
       <img src="/logo.svg" width={150} height={100} />
 
-      <ul>
+      <ul className=" gap-16 hidden md:flex">
         {list.map((item, index) => (
-          <li>{item.name}</li>
+          <li className="font-medium hover:text-[#2479F0] cursor-pointer transition-all duration-100 ">
+            {item.name}
+          </li>
         ))}
       </ul>
 
-{
-    isSignedIn ?
-    <div> <UserButton/>
-    <Button>Submit Listing </Button>
-    </div> :""
-}
-
+      {isSignedIn ? (
+        <div className="flex items-center gap-5">
+          {" "}
+          <UserButton />
+          <Button>Submit Listing </Button>
+        </div>
+      ) : (
+        ""
+      )}
     </div>
   );
 };
