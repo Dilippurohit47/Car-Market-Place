@@ -4,6 +4,9 @@ import { SignIn, SignInButton } from "@clerk/clerk-react";
 import Headers from "./components/Headers";
 import Hero from "./components/Hero";
 import Category from "./components/Category";
+import MostSearchCar from "./components/MostSearchCar";
+import InfoSection from "./components/InfoSection";
+import Footer from "./components/Footer";
 
 const Home = () => {
   return (
@@ -11,6 +14,9 @@ const Home = () => {
 <Headers/>
 <Hero/>
 <Category/>
+<MostSearchCar/>
+<InfoSection/>
+<Footer/>
     </>
   );
 };
