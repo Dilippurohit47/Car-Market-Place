@@ -9,9 +9,13 @@ import { Separator } from "@/components/ui/separator";
 import CheckBoxField from "./components/CheckBoxField";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox"
+import { CarListing } from "../../config/schema";
+import { db } from "../../config";
+import UploadImages from "./components/uploadImages";
 
 const AddListing = () => {
   const [formData, setFormData] = useState([]);
+  const [featuresData,setFeaturesData] = useState([])
 
   const handleInputChange = (name, value) => {
     setFormData((prevData) => ({
@@ -20,10 +24,28 @@ const AddListing = () => {
     }));
   };
 
-  const onsubmit=(e)=>{
-    e.preventDefault()
-    console.log(formData);
+  const handleFeatureData = (name,value)=>{
+    setFeaturesData((prevData)=>({
+      ...prevData,
+      [name]:value
+    }))
+  }
 
+  const onsubmit=async(e)=>{
+    e.preventDefault()
+   try {
+    const result = await db.insert(CarListing).values({
+      ...formData,
+      features:featuresData
+    })
+
+    if(result){
+      console.log("Data saved")
+    }
+   } catch (error) {
+    console.log("Eror in saving",error)
+   }
+  
   }
 
   return (
@@ -70,12 +92,14 @@ const AddListing = () => {
             <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
               {Features?.features?.map((item, index) => (
                 <div key={index} className="flex gap-3">
-                  <Checkbox  item={item} onCheckedChange={(value)=>handleInputChange(item.name,value)} />
+                  <Checkbox  item={item} onCheckedChange={(value)=>handleFeatureData(item.name,value)} />
                   <label>{item.label}</label>
                 </div>
               ))}
             </div>
           </div>
+<Separator className="my-6" />
+          <UploadImages/>
           <div className="mt-10 flex justify-end">
             <Button type="submit" onClick={(e)=>onsubmit(e)}>Submit</Button>
           </div>
