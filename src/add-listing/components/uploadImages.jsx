@@ -1,6 +1,11 @@
-import React, { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { storage } from "../../../config/firebaseConfig";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import React, { useEffect, useState } from "react";
 import { IoMdClose } from "react-icons/io";
-const UploadImages = () => {
+import { CarImages, CarListing } from "../../../config/schema";
+import { db } from "../../../config";
+const UploadImages = ({triggerUploadImages,setLoader}) => {
   const [selectedFileList, setSelectedFileList] = useState([]);
 
   const onFileSelected = (e) => {
@@ -11,10 +16,41 @@ const UploadImages = () => {
     }
   };
 
+  useEffect(()=>{
+if(triggerUploadImages){
+    uploadImageToServer();
+}
+  },[triggerUploadImages])
+
   const onImageRemove = (image, index) => {
     const result = selectedFileList.filter((item) => item != image);
     console.log(result);
     setSelectedFileList(result);
+  };
+
+  const uploadImageToServer = () => {
+setLoader(true)
+    selectedFileList.forEach((file) => {
+      const fileName = Date.now() + ".jpeg";
+      const storageRef = ref(storage, "car-marketplace/" + fileName);
+      const metaData = {
+        contentType: "image/jpeg",
+      };
+      uploadBytes(storageRef, file, metaData)
+        .then((snapShot) => {
+          console.log("Uploaded file");
+        })
+        .then((res) => {
+          getDownloadURL(storageRef).then(async (downloadUrl) => {
+            console.log(downloadUrl);
+            await db.insert(CarImages).values({
+               imageUrl:downloadUrl,
+               carListingId:triggerUploadImages
+            })
+          });
+        });
+        setLoader(false)
+    });
   };
 
   return (
