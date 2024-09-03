@@ -56,7 +56,6 @@ const AddListing = () => {
         })
         .returning({ id: CarListing.id });
       if (result) {
-        console.log(result);
         console.log("Data saved");
         setTriggerUploadImages(result[0]?.id);
         setLoader(false)
