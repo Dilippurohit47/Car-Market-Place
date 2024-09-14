@@ -1,4 +1,9 @@
-import { UserButton, useUser } from "@clerk/clerk-react";
+import {
+  SignedOut,
+  SignInButton,
+  UserButton,
+  useUser,
+} from "@clerk/clerk-react";
 import React from "react";
 import { Button } from "./ui/button";
 import { Link } from "react-router-dom";
@@ -31,9 +36,12 @@ const Headers = () => {
 
       <ul className=" gap-16 hidden md:flex">
         {list.map((item, index) => (
-          <li className="font-medium hover:text-[#2479F0] cursor-pointer transition-all duration-100 ">
+          <Link to={item.link}>
+             <li className="font-medium hover:text-[#2479F0] cursor-pointer transition-all duration-100 ">
             {item.name}
           </li>
+          </Link>
+       
         ))}
       </ul>
 
@@ -46,7 +54,11 @@ const Headers = () => {
           </Link>
         </div>
       ) : (
-        ""
+        <div className="bg-[#2b00ffc5] px-2 py-1 text-white rounded-md">
+          <SignedOut>
+            <SignInButton />
+          </SignedOut>
+        </div>
       )}
     </div>
   );

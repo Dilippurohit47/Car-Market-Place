@@ -1,7 +1,6 @@
 import React from 'react'
 import Headers from '../components/Headers'
-import { Button } from '../components/ui/button'
-import { Link } from 'react-router-dom'
+
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import MyListing from './components/MyListing'
 

@@ -14,6 +14,7 @@ export const CarListing = pgTable("carListing", {
   driveType: varchar("driveType"),
   fuelType: varchar("fuelType"),
   mileage: varchar("mileage"),
+  transmission: varchar("transmission"),
   engineSize: varchar("engineSize"),
   Color: varchar("Color"),
   door: varchar("door"),
