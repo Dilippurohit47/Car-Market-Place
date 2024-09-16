@@ -5,10 +5,13 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./home";
 import Contact from "./contact";
 
-import { ClerkProvider } from '@clerk/clerk-react'
+import { ClerkProvider } from "@clerk/clerk-react";
 import AddListing from "./add-listing";
 import Profile from "./profile";
 import { Toaster } from "sonner";
+import SearchByCategory from "./search/[category]";
+import SearchByOptions from "./search";
+import ListingDetails from "./listing-details/[id]";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -21,14 +24,28 @@ const router = createBrowserRouter([
   {
     path: "/profile",
     element: <Profile />,
+  },
+  {
+    path: "/add-listing",
+    element: <AddListing />,
   },{
-    path:"/add-listing",
-    element:<AddListing/>
+    path: "/search/:category",
+    element:<SearchByCategory/>
+  }
+  ,{
+    path: "/search",
+    element:<SearchByOptions/>
+  }
+  ,{
+    path: "/listing-details/:id",
+    element:<ListingDetails/>
   }
 ]);
 
-const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY ||"pk_test_aW5ub2NlbnQta3JpbGwtNjIuY2xlcmsuYWNjb3VudHMuZGV2JA";
- console.log(PUBLISHABLE_KEY)
+const PUBLISHABLE_KEY =
+  import.meta.env.VITE_CLERK_PUBLISHABLE_KEY ||
+  "pk_test_aW5ub2NlbnQta3JpbGwtNjIuY2xlcmsuYWNjb3VudHMuZGV2JA";
+console.log(PUBLISHABLE_KEY);
 if (!PUBLISHABLE_KEY) {
   throw new Error("Missing Publishable Key");
 }

@@ -29,7 +29,7 @@ const AddListing = () => {
 
   const mode = searchParams.get("mode");
   const carId = searchParams.get("id");
-const [carInfo ,setCarInfo] = useState([])
+  const [carInfo, setCarInfo] = useState([]);
   useEffect(() => {
     if (mode == "edit") {
       GetListingDetail();
@@ -42,12 +42,11 @@ const [carInfo ,setCarInfo] = useState([])
       .from(CarListing)
       .innerJoin(CarImages, eq(CarListing.id, CarImages.carListingId))
       .where(eq(CarListing.id, carId));
-      
-      const resp = Service.FormatResult(result)
-
-      setCarInfo(resp[0])
-      setFormData(resp[0])
-      setFeaturesData(resp[0].features)
+    const resp = Service?.FormatResult(result);
+    console.log("detail",resp);
+    setCarInfo(resp[0]);
+    setFormData(resp[0]);
+    setFeaturesData(resp[0]?.features);
   };
 
   const [loader, setLoader] = useState(false);
@@ -70,30 +69,30 @@ const [carInfo ,setCarInfo] = useState([])
   };
 
   const onsubmit = async (e) => {
-
-
-
     setLoader(true);
     e.preventDefault();
     toast("PLease wait");
 
-    if(mode == "edit"){
-const result = await db.update(CarListing).set({
-  ...formData,
-  features: featuresData,
-  createdBy: user?.primaryEmailAddress?.emailAddress,
-  userName:user?.fullName,
-  userImageUrl:user?.imageUrl,
-  postedOn: moment().format("DD/MM/YYYY"),
-}).where(eq(CarListing.id,carId)).returning({id:CarListing.id});
-if (result) {
-  console.log("Data saved");
-  setTriggerUploadImages(result[0]?.id);
-  setLoader(false);
-  toast.success("Listing Added Successfully");
-}
-    }
-    else{
+    if (mode == "edit") {
+      const result = await db
+        .update(CarListing)
+        .set({
+          ...formData,
+          features: featuresData,
+          createdBy: user?.primaryEmailAddress?.emailAddress,
+          userName: user?.fullName,
+          userImageUrl: user?.imageUrl,
+          postedOn: moment().format("DD/MM/YYYY"),
+        })
+        .where(eq(CarListing.id, carId))
+        .returning({ id: CarListing.id });
+      if (result) {
+        console.log("Data saved");
+        setTriggerUploadImages(result[0]?.id);
+        setLoader(false);
+        toast.success("Listing Added Successfully");
+      }
+    } else {
       try {
         const result = await db
           .insert(CarListing)
@@ -101,8 +100,8 @@ if (result) {
             ...formData,
             features: featuresData,
             createdBy: user?.primaryEmailAddress?.emailAddress,
-            userName:user?.fullName,
-            userImageUrl:user?.imageUrl,
+            userName: user?.fullName,
+            userImageUrl: user?.imageUrl,
             postedOn: moment().format("DD/MM/YYYY"),
           })
           .returning({ id: CarListing.id });
@@ -116,9 +115,8 @@ if (result) {
         console.log("Eror in saving", error);
       }
     }
-   
   };
-
+console.log(carInfo)
   return (
     <div>
       <Headers />
@@ -138,17 +136,20 @@ if (result) {
                     ) : null}
                   </label>
                   {item.fieldType === "text" || item.fieldType === "number" ? (
-                    <InputField carInfo={carInfo}
+                    <InputField
+                      carInfo={carInfo}
                       item={item}
                       handleInputChange={handleInputChange}
                     />
                   ) : item.fieldType === "dropdown" ? (
-                    <DropdownField  carInfo={carInfo}
+                    <DropdownField
+                      carInfo={carInfo}
                       handleInputChange={handleInputChange}
                       item={item}
                     />
                   ) : item.fieldType === "textarea" ? (
-                    <TextAreaField carInfo={carInfo}
+                    <TextAreaField
+                      carInfo={carInfo}
                       item={item}
                       handleInputChange={handleInputChange}
                     />
@@ -163,7 +164,8 @@ if (result) {
             <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
               {Features?.features?.map((item, index) => (
                 <div key={index} className="flex gap-3">
-                  <Checkbox checked={featuresData?.[item.name]}
+                  <Checkbox
+                    checked={featuresData?.[item.name]}
                     item={item}
                     onCheckedChange={(value) =>
                       handleFeatureData(item.name, value)
@@ -175,7 +177,9 @@ if (result) {
             </div>
           </div>
           <Separator className="my-6" />
-          <UploadImages carInfo={carInfo}
+          <UploadImages
+            carInfo={carInfo}
+            mode={mode}
             setLoader={(v) => {
               setLoader(v);
               navigate("/profile");

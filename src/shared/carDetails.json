@@ -202,7 +202,6 @@
       "label": "Listing Description",
       "name": "listingDescription",
       "fieldType": "textarea",
-      "required": true,
       "column": 2,
       "icon": "FaFileAlt"
     }

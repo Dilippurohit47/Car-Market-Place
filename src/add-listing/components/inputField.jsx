@@ -2,8 +2,7 @@ import { Input } from "@/components/ui/input";
 import React from "react";
 
 const InputField = ({ item, handleInputChange, carInfo }) => {
-  console.log("CAr",carInfo)
-  console.log(item)
+  
   return (
     <div>
       <Input

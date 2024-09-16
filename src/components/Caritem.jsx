@@ -4,9 +4,12 @@ import { MdSpeed } from "react-icons/md";
 import { GiGearStickPattern } from "react-icons/gi";
 import { Separator } from "./ui/separator";
 import { IoOpenOutline } from "react-icons/io5";
+import { Link } from "react-router-dom";
 const Caritem = ({ car }) => {
   return (
-    <div className="rounded-xl bg-white border hover:shadow-2xl cursor-pointer ">
+
+    <Link to={`/listing-details/${car?.id}`}>
+      <div className="rounded-xl bg-white border hover:shadow-2xl cursor-pointer ">
         <h2 className="absolute m-2 bg-green-500 text-white rounded-full text-sm px-2">New</h2>
       <img
         src={car?.images[0]?.imageUrl} 
@@ -44,6 +47,8 @@ const Caritem = ({ car }) => {
         </div>
       </div>
     </div>
+    </Link>
+  
   );
 };
 
