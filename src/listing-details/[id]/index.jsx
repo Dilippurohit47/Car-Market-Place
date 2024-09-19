@@ -9,7 +9,8 @@ import Service from "@/shared/Service";
 import ImageGallery from "../components/imageGallery";
 import Description from "../components/Description";
 import Features from "../components/Features";
-
+import Pricing from "../components/Pricing";
+import CarSpecification from "../components/carSpecification"
 
 const ListingDetails = () => {
   const { id } = useParams();
@@ -17,7 +18,7 @@ const ListingDetails = () => {
   useEffect(() => {
     GetCarDetails();
   }, [id]);
-console.log(carDetails)
+  console.log(carDetails);
   const GetCarDetails = async () => {
     const result = await db
       .select()
@@ -26,7 +27,7 @@ console.log(carDetails)
       .where(eq(CarListing.id, id));
 
     const resp = Service.FormatResult(result);
-    console.log("resp",resp);
+    console.log("resp", resp);
     setCarDetails(resp[0]);
   };
 
@@ -37,14 +38,17 @@ console.log(carDetails)
         <DetailHeader carDetails={carDetails} />
       </div>
 
-      <div className="md:px-20  grid grid-cols-1 md:grid-cols-3 w-full mt-5 gap-5">
+      <div className="md:px-5 lg:px-20  grid grid-cols-1 md:grid-cols-3 w-full mt-5 gap-5">
         <div className="md:col-span-2">
           <ImageGallery carDetails={carDetails} />
-          <Description  carDetails={carDetails}/>
-          <Features features={carDetails?.features}/>
+          <Description carDetails={carDetails} />
+          <Features features={carDetails?.features} />
         </div>
 
-        <div></div>
+        <div>
+          <Pricing carDetails={carDetails} />
+          <CarSpecification carDetails={carDetails} />
+        </div>
       </div>
     </div>
   );
