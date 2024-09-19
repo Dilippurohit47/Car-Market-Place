@@ -8,13 +8,13 @@ import { GiGearStickPattern } from "react-icons/gi";
 const DetailHeader = ({ carDetails }) => {
 
   return (
-    <div>
+    <div className="">
       {carDetails?.listingTitle ? (
-        <div>
-          <h2 className="font-bold text-3xl">{carDetails?.listingTitle}</h2>
+        <div className="px-2">
+          <h2 className="font-bold text-2xl md:text-3xl">{carDetails?.listingTitle}</h2>
           <p className="text-sm">{carDetails?.tagline}</p>
 
-          <div className="flex gap-4">
+          <div className="md:flex gap-4 grid grid-cols-2 ">
             <div className=" flex gap-2 items-center p-2 bg-blue-50 rounded-full">
               <IoCalendarNumberOutline className="h-5 w-5 text-primary" />
               <h2 className=" text-sm text-primary">{carDetails?.Year}</h2>

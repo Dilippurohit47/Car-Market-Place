@@ -37,8 +37,8 @@ const ListingDetails = () => {
 
   return (
     <div>
-      <Headers />
-      <div className="p-10 md:px-20 ">
+      <Headers /> 
+      <div className="md:p-10 md:px-20  ">
         <DetailHeader carDetails={carDetails} />
       </div>
 

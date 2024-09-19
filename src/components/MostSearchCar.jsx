@@ -12,7 +12,7 @@ import { CarImages, CarListing } from "../../config/schema";
 import { desc, eq } from "drizzle-orm";
 import { db } from "../../config";
 import Service from "@/shared/Service";
-const MostSearchCar = ({heading}) => {
+const MostSearchCar = ({ heading }) => {
   const [carList, setCarList] = useState([]);
 
   useEffect(() => {
@@ -31,15 +31,18 @@ const MostSearchCar = ({heading}) => {
   };
 
   return (
-    <div className="mx-24  pb-5  ">
-      <h2 className="font-bold text-3xl text-center mt-16 mb-7 ">
-      {heading || "  Most Searched Cars"}
+    <div className="md:mx-24  pb-5  mx-2 hidden md:block  ">
+      <h2 className="font-bold  md:text-3xl text-center  mt-16 mb-7 ">
+        {heading || "  Most Searched Cars"}
       </h2>
 
-      <Carousel className="">
-        <CarouselContent className="pb-4">
+      <Carousel className="w-full relative ">
+        <CarouselContent className="pb-4 ">
           {carList?.map((car, index) => (
-            <CarouselItem key={index} className="basis-1/4">
+            <CarouselItem
+              key={index}
+              className="  md:basis-2/4 sm:basis-2/4 lg:basis-1/4  "
+            >
               <Caritem car={car} key={index} />
             </CarouselItem>
           ))}

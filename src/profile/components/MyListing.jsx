@@ -52,17 +52,17 @@ const MyListing = () => {
     }
   };
 
-  return (
-    <div className="mt-6">
+  return ( 
+    <div className="mt-6 ">
       <div className="flex justify-between items-center ">
-        <h2 className="font-bold text-4xl">My Listing</h2>
+        <h2 className="font-bold text-2xl md:text-4xl">My Listing</h2>
         <Link to={"/add-listing"}>
-          <Button>+ Add New Listing</Button>
+          <Button className="">+ Add New Listing</Button>
         </Link>
       </div>
-      <div className="grid grid-cols-2 md:grid-cols-3 mt-7 lg:grid-cols-4 gap-5">
+      <div className="grid grid-cols-1  md:grid-cols-2   lg:grid-cols-4  md:gap-5  ">
         {carList.map((item, index) => (
-          <div key={index}>
+          <div key={index} className=" md:mt-10 mt-16">
             <Caritem car={item} />
             <div className="p-2 bg-gray-50 gap-2 rounded-lg  flex justify-between">
               <Link

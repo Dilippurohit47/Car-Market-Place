@@ -7,7 +7,7 @@ const ImageGallery = ({ carDetails }) => {
   return (
     <>
       {hasValidImages ? (
-        <div>
+        <div className="px-2">
           <img
             src={carDetails.images[0]?.imageUrl} 
             className="w-full object-cover h-[500px] rounded-xl"

@@ -9,9 +9,9 @@ const Profile = () => {
   return (
     <div>
       <Headers />
-      <div className="px-10 md:px-20 my-10 ">
+      <div className="md:px-10 px-1 lg:px-20 my-10  ">
         <Tabs defaultValue="my-listing" className="w-full">
-          <TabsList className="w-full flex p-7  justify-start">
+          <TabsList className="w-full flex md:p-7 p-3  justify-start">
             <TabsTrigger
               value="my-listing"
               className="text-1xl px-4 py-2 rounded-lg focus:outline-none 

@@ -9,22 +9,7 @@ import { Button } from "./ui/button";
 import { Link } from "react-router-dom";
 
 const list = [
-  {
-    name: "Home",
-    link: "/",
-  },
-  {
-    name: "Search",
-    link: "/",
-  },
-  {
-    name: "New",
-    link: "/",
-  },
-  {
-    name: "Preowned",
-    link: "/",
-  },
+ 
 ];
 
 const Headers = () => {

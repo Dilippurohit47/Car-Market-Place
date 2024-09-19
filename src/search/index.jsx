@@ -10,14 +10,14 @@ import Caritem from "@/components/Caritem";
 
 const SearchByOptions = () => {
   const [searchParams] = useSearchParams();
-const [searchResults,setSearchResults] = useState([])
+  const [searchResults, setSearchResults] = useState([]);
   const condition = searchParams.get("cars");
   const price = searchParams.get("price");
   const make = searchParams.get("make");
 
   useEffect(() => {
     getCarList();
-  }, [make,condition]);
+  }, [make, condition]);
 
   const getCarList = async () => {
     const result = await db
@@ -28,31 +28,33 @@ const [searchResults,setSearchResults] = useState([])
       .where(make != undefined && eq(CarListing.make, make));
 
     const resp = Service.FormatResult(result);
-    setSearchResults(resp)
+    setSearchResults(resp);
   };
-  return     <div>
-  <Headers />
-  <div className="p-16 bg-black flex justify-center ">
-    <Search />
-  </div>
-  <div className="p-10 md:px-20">
-    <h2 className="font-bold  text-4xl ">{make} {condition}</h2>
+  return (
+    <div className="bg-gray-100">
+      <Headers />
+      <div className="flex items-center justify-center mt-4 ">
+        <Search />
+      </div>
+      <div className="md:p-10 p-2   mt-10 md:mt-4 md:px-20">
+        <h2 className="font-bold  md:text-4xl text-2xl ">
+          {make} {condition}
+        </h2>
 
-    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-7 gap-5">
-    { searchResults.length > 0 ? 
-      searchResults.map((item,index)=>(
-       <div>
-          <Caritem car={item} />
-       </div>
-         
-      )) : [1,2,3,4,5].map((item,index)=>(
-        <div className="h-[370px] rounded-xl bg-slate-200 animate-pulse">
-
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2   lg:grid-cols-4 mt-7 gap-5">
+          {searchResults.length > 0
+            ? searchResults.map((item, index) => (
+                <div className="">
+                  <Caritem car={item} />
+                </div>
+              ))
+            : [1, 2, 3, 4, 5].map((item, index) => (
+                <div className="h-[370px] rounded-xl bg-slate-200 animate-pulse"></div>
+              ))}{" "}
         </div>
-      ))
-    } </div>
-  </div>
-</div>
+      </div>
+    </div>
+  );
 };
 
 export default SearchByOptions;

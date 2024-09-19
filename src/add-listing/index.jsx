@@ -120,7 +120,7 @@ console.log(carInfo)
   return (
     <div>
       <Headers />
-      <div className="px-10 md:px-20 my-10 ">
+      <div className="md:px-10 md:px-20 my-10 ">
         <h2 className="font-bold text-4xl">Add New Listing</h2>
 
         <form className="border rounded-xl p-10 mt-10">

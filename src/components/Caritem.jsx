@@ -9,7 +9,7 @@ const Caritem = ({ car }) => {
   return (
 
     <Link to={`/listing-details/${car?.id}`}>
-      <div className="rounded-xl bg-white border hover:shadow-2xl cursor-pointer h-full ">
+      <div className="rounded-xl bg-white border hover:shadow-2xl cursor-pointer h-full grid grid-cols-1  ">
         <h2 className="absolute m-2 bg-green-500 text-white rounded-full text-sm px-2">New</h2>
       <img
         src={car?.images[0]?.imageUrl} 
