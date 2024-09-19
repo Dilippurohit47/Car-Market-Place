@@ -2,7 +2,6 @@ import React from "react";
 import { IoMdCheckmark } from "react-icons/io";
 const Features = ({ features }) => {
   const Features = features;
-  console.log("Features", [features][0]);
 
   return (
     <div className="mt-6 ">

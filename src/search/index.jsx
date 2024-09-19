@@ -30,7 +30,6 @@ const [searchResults,setSearchResults] = useState([])
     const resp = Service.FormatResult(result);
     setSearchResults(resp)
   };
-console.log(searchResults)
   return     <div>
   <Headers />
   <div className="p-16 bg-black flex justify-center ">

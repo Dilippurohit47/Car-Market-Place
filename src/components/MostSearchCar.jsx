@@ -12,7 +12,7 @@ import { CarImages, CarListing } from "../../config/schema";
 import { desc, eq } from "drizzle-orm";
 import { db } from "../../config";
 import Service from "@/shared/Service";
-const MostSearchCar = () => {
+const MostSearchCar = ({heading}) => {
   const [carList, setCarList] = useState([]);
 
   useEffect(() => {
@@ -33,7 +33,7 @@ const MostSearchCar = () => {
   return (
     <div className="mx-24  pb-5  ">
       <h2 className="font-bold text-3xl text-center mt-16 mb-7 ">
-        Most Searched Cars
+      {heading || "  Most Searched Cars"}
       </h2>
 
       <Carousel className="">

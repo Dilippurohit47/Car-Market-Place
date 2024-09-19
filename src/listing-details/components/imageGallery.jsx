@@ -1,7 +1,6 @@
 import React from "react";
 
 const ImageGallery = ({ carDetails }) => {
-  console.log(carDetails);
 
   const hasValidImages = carDetails?.images && Array.isArray(carDetails.images) && carDetails.images.length > 0;
 

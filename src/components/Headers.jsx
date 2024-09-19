@@ -32,7 +32,9 @@ const Headers = () => {
 
   return (
     <div className="flex justify-between items-center shadow-sm p-5">
-      <img src="/logo.svg" width={150} height={100} />
+<Link to={"/"}>
+<img src="/logo.svg" width={150} height={100} />
+</Link>
 
       <ul className=" gap-16 hidden md:flex">
         {list.map((item, index) => (

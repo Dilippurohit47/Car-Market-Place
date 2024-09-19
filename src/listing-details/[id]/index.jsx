@@ -10,10 +10,11 @@ import ImageGallery from "../components/imageGallery";
 import Description from "../components/Description";
 import Features from "../components/Features";
 import Pricing from "../components/Pricing";
-import CarSpecification from "../components/carSpecification"
+import CarSpecification from "../components/carSpecification";
 import OwnersDetail from "../components/OwnersDetail";
 import Footer from "@/components/Footer";
 import FinancingCalci from "../components/FinancingCalci";
+import MostSearchCar from "@/components/MostSearchCar";
 
 const ListingDetails = () => {
   const { id } = useParams();
@@ -39,7 +40,6 @@ const ListingDetails = () => {
       <Headers />
       <div className="p-10 md:px-20 ">
         <DetailHeader carDetails={carDetails} />
-
       </div>
 
       <div className="md:px-5 lg:px-20  grid grid-cols-1 md:grid-cols-3 w-full mt-5 gap-5">
@@ -56,8 +56,9 @@ const ListingDetails = () => {
           <OwnersDetail carDetails={carDetails} />
         </div>
       </div>
-      <Footer />
+      <MostSearchCar heading={"Related Cars"} />
 
+      <Footer />
     </div>
   );
 };
